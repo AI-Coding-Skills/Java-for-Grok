@@ -17,7 +17,7 @@ This repository provides high-quality skills for building modern Java applicatio
 | Skill | Description | Status |
 |-------|-------------|--------|
 | `helidon-best-practices` | Best practices for Helidon 4 (SE + MP) | ✅ Ready |
-| `springboot-best-practices` | Best practices for modern Spring Boot | 🔜 Coming soon |
+| `springboot-best-practices` | Best practices for modern Spring Boot | ✅ Ready |
 | `java-bootstrap` | Scaffold clean Java / Helidon / Spring Boot projects | 🔜 Coming soon |
 | `modern-java` | Records, virtual threads, pattern matching, etc. | 🔜 Planned |
 
@@ -51,22 +51,34 @@ grok plugin list
 grok inspect --json
 ```
 
-Confirm `helidon-best-practices` appears under the `java` plugin in `grok inspect` output.
+Confirm `helidon-best-practices` and `springboot-best-practices` appear under the `java` plugin in `grok inspect` output.
 
-### 2. Run the Helidon SE example
+### 2. Run the examples
 
-See [examples/helidon-se-customers/README.md](examples/helidon-se-customers/README.md) for build and curl steps.
+- Helidon SE: [examples/helidon-se-customers/README.md](examples/helidon-se-customers/README.md)
+- Spring Boot: [examples/springboot-customers/README.md](examples/springboot-customers/README.md)
 
-### 3. Exercise the skill in Grok
+### 3. Exercise the skills in Grok
 
-Open Grok in a Java/Helidon project and ask Helidon 4 questions, for example:
+Open Grok in a Java project and ask framework-specific questions.
+
+**Helidon 4:**
 
 - “Add a Helidon SE `HttpService` for customers with GET `/{id}`”
 - “Migrate this handler from Helidon 3 APIs to Helidon 4”
 
 Grok should prefer Helidon 4 APIs (`io.helidon.http.Status`, `HttpRules`, `pathParameters()`, `jakarta.*`).
 
-Skill-specific notes: [skills/helidon-best-practices/README.md](skills/helidon-best-practices/README.md)
+Skill notes: [skills/helidon-best-practices/README.md](skills/helidon-best-practices/README.md)
+
+**Spring Boot 3:**
+
+- “Add a `@RestController` for customers with validation and proper HTTP status codes”
+- “Add a `@RestControllerAdvice` for consistent validation errors”
+
+Grok should prefer constructor injection, DTO records, `jakarta.*` validation, and `@Service` for business logic.
+
+Skill notes: [skills/springboot-best-practices/README.md](skills/springboot-best-practices/README.md)
 
 ## Plugin Structure
 
@@ -76,12 +88,16 @@ Java-for-Grok/
 ├── LICENSE
 ├── plugin.json
 ├── examples/
-│   └── helidon-se-customers/        # Runnable Helidon SE demo
+│   ├── helidon-se-customers/        # Runnable Helidon SE demo
+│   └── springboot-customers/        # Runnable Spring Boot demo
 ├── skills/
 │   ├── helidon-best-practices/
 │   │   ├── README.md
 │   │   └── SKILL.md
-│   ├── springboot-best-practices/   (coming soon)
+│   ├── springboot-best-practices/
+│   │   ├── README.md
+│   │   └── SKILL.md
+│   ├── java-bootstrap/              (coming soon)
 │   └── ...
 └── .grok-plugin/
     └── plugin.json
