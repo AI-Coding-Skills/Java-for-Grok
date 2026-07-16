@@ -58,6 +58,8 @@ import io.helidon.webserver.http.HttpService;
 import io.helidon.webserver.http.ServerRequest;
 import io.helidon.webserver.http.ServerResponse;
 
+record CreateCustomerRequest(String name, String email) {}
+
 public final class CustomerHttpService implements HttpService {
 
     private final CustomerService customerService;
@@ -83,7 +85,14 @@ public final class CustomerHttpService implements HttpService {
     }
 
     private void create(ServerRequest request, ServerResponse response) {
-        // parse + validate request body, then call service
+        CreateCustomerRequest req = request.content().as(CreateCustomerRequest.class);
+
+        try {
+            Customer created = customerService.create(req);
+            response.status(Status.CREATED_201).send(created);
+        } catch (IllegalArgumentException e) {
+            response.status(Status.BAD_REQUEST_400).send(e.getMessage());
+        }
     }
 }
 ```
