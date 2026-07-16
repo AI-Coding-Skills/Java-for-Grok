@@ -33,7 +33,7 @@ The example mirrors patterns from `SKILL.md` (thin `HttpService`, domain service
 
 ## Out of scope
 
-- Spring Boot → see `springboot-best-practices` (planned)
+- Spring Boot → see [`springboot-best-practices`](../springboot-best-practices/README.md)
 - Generic Java language features → see `modern-java` (planned)
 - Project scaffolding → see `java-bootstrap` (planned)
 
